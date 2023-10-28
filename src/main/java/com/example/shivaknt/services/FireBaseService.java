@@ -28,29 +28,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class FireBaseService {
-	
-//    FirebaseDatabase db;
-//
-//    public FireBaseService() throws IOException {
-//    	System.out.println("FIrebase service initialising....");
-//        File file = new File(
-//                getClass().getClassLoader().getResource("serviceAccountKey .json").getFile());
-//        
-//        FileInputStream serviceAccount =
-//        		new FileInputStream(file.getAbsolutePath());
-//
-//        		FirebaseOptions options = new FirebaseOptions.Builder()
-//        		  .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-//        		  .build();
-//
-//        		FirebaseApp.initializeApp(options);
-//
-//        db = FirebaseDatabase.getInstance();
-//    }
-//
-//    public FirebaseDatabase getDb() {
-//        return db;
-//    }
     
     public boolean pushDataOnDatabaseService(List<ArticlesBean> articlesList, String collection, int reqId) throws InterruptedException, ExecutionException {
     	Firestore dbFireStore = FirestoreClient.getFirestore();
