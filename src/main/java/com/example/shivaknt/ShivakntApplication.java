@@ -3,6 +3,8 @@ package com.example.shivaknt;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.Objects;
 
 import org.springframework.boot.SpringApplication;
@@ -25,15 +27,30 @@ public class ShivakntApplication {
 	public static void initialiseFirebase() throws IOException{
 		ClassLoader classLoader = ShivakntApplication.class.getClassLoader();
 		System.out.println("FIrebase service initialising....");
-        File file = new File(Objects.requireNonNull(classLoader.getResource("serviceAccountKey.json").getFile()));
+		String fileName = "serviceAccountKey.json";
+//		URL url = ClassLoader.getSystemClassLoader().getResource(fileName);
+////        File file = new File(Objects.requireNonNull(classLoader.getResource("serviceAccountKey.json").getFile()));
+//        
+//        FileInputStream serviceAccount = new FileInputStream(url.getFile());
+//
+//        FirebaseOptions options = new FirebaseOptions.Builder()
+//        		  .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+//        		  .build();
+//
+//        FirebaseApp.initializeApp(options);
         
-        FileInputStream serviceAccount = new FileInputStream(file.getAbsolutePath());
+        
+        try (InputStream inputStream = classLoader.getResourceAsStream(fileName)) {
 
-        FirebaseOptions options = new FirebaseOptions.Builder()
-        		  .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-        		  .build();
+        	FirebaseOptions options = new FirebaseOptions.Builder()
+          		  .setCredentials(GoogleCredentials.fromStream(inputStream))
+          		  .build();
 
-        FirebaseApp.initializeApp(options);
+          FirebaseApp.initializeApp(options);
+
+           } catch (IOException e) {
+               e.printStackTrace();
+           }
 	}
 
 }
