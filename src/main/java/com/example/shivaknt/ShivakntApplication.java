@@ -26,7 +26,6 @@ public class ShivakntApplication {
 	
 	public static void initialiseFirebase() throws IOException{
 		ClassLoader classLoader = ShivakntApplication.class.getClassLoader();
-		System.out.println("FIrebase service initialising....");
 		String fileName = "serviceAccountKey.json";
 //		URL url = ClassLoader.getSystemClassLoader().getResource(fileName);
 ////        File file = new File(Objects.requireNonNull(classLoader.getResource("serviceAccountKey.json").getFile()));

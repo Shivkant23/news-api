@@ -54,17 +54,17 @@ public class NewsController {
 //	}
 	
 	@GetMapping(path = "/news-fetch")
-	public List<ArticlesBean> fetchNewsFromFireStore(@RequestParam String country, @RequestParam String categoty) throws IOException, InterruptedException, ExecutionException {
+	public ResponseEntity<NewsBean> fetchNewsFromFireStore(@RequestParam String country, @RequestParam String categoty) throws IOException, InterruptedException, ExecutionException {
 		return newsService.fetchNewsFromFireStore(country, categoty);
 	}
 	
 	@GetMapping(path = "/news-fetch-search")
-	public List<ArticlesBean> fetchNewsFromFireStore(@RequestParam String search) throws IOException, InterruptedException, ExecutionException {
+	public ResponseEntity<NewsBean> fetchNewsFromFireStore(@RequestParam String search) throws IOException, InterruptedException, ExecutionException {
 		return newsService.fetchNewsFromFireStore(search);
 	}
 	
 	@GetMapping(path = "/collections")
-	public List<String> getAllCollectionsNames(){
+	public ResponseEntity<List<String>> getAllCollectionsNames(){
 		return newsService.getAllCollectionsNames();
 	}
 }

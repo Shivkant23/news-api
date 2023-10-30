@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -48,7 +50,6 @@ public class NewsServiceImplementation implements NewsService{
 		int timeCounter = 0, counter = 0;
 		System.out.println("2News api is get called  :---  " + result.getArticles().size());
 		for(int i = 0; i<result.getArticles().size(); i++) {
-//		for(int i = 0; i < 2; i++) {
 			try {
 				String urlOfWeb = result.getArticles().get(i).getUrl();
 				String strTitle = CommonUtils.getString(result.getArticles().get(i).getTitle());
@@ -155,7 +156,7 @@ public class NewsServiceImplementation implements NewsService{
 			// TODO: handle exception
 		}
 		
-		List<String> collections = getAllCollectionsNames();
+		List<String> collections = (List<String>) getAllCollectionsNames();
 		FireBaseService service = new FireBaseService();
 		for(int i = 0; i<collections.size(); i++) {
 			if(!Arrays.stream(listOfKeywords).anyMatch(collections.get(i)::equals)) {
@@ -165,35 +166,48 @@ public class NewsServiceImplementation implements NewsService{
 	}
 	
 	
-	public List<ArticlesBean> fetchNewsFromFireStore(String search) throws IOException, InterruptedException, ExecutionException {
+	public ResponseEntity<NewsBean> fetchNewsFromFireStore(String search) throws IOException, InterruptedException, ExecutionException {
 		FireBaseService service = new FireBaseService();
 		List<ArticlesBean> list = service.getParamArticles(search);
+		NewsBean newsBean = new NewsBean();
 		if(list.isEmpty()) {
-			NewsBean bean = getNews("", "", search, 0);
-			list = bean.getArticles();
+			newsBean = getNews("", "", search, 0);
+			list = newsBean.getArticles();
 		}
-		return list;
+		if(!list.isEmpty()) {
+			newsBean.setArticles(list);
+			newsBean.setStatus("OK");
+			newsBean.setTotalresults(list.size());
+		}
+		return new ResponseEntity<NewsBean>(newsBean, HttpStatus.OK);
 	}
 	
-	public List<ArticlesBean> fetchNewsFromFireStore(String country, String category) throws IOException, InterruptedException, ExecutionException {
+	public ResponseEntity<NewsBean> fetchNewsFromFireStore(String country, String category) throws IOException, InterruptedException, ExecutionException {
 		FireBaseService service = new FireBaseService();
 		String collectionName = !(category.isEmpty()) ? category  : country;
 		List<ArticlesBean> list = service.getParamArticles(collectionName);
+		NewsBean newsBean = new NewsBean();
+		
 		if(list.isEmpty()) {
-			NewsBean bean = getNews(country, category, "", 0);
-			list = bean.getArticles();
+			newsBean = getNews(country, category, "", 0);
 		}
-		return list;
+		if(!list.isEmpty()) {
+			newsBean.setArticles(list);
+			newsBean.setStatus("OK");
+			newsBean.setTotalresults(list.size());
+		}
+		return new ResponseEntity<NewsBean>(newsBean, HttpStatus.OK);
 	}
 	
-	public List<String> getAllCollectionsNames(){
+	public ResponseEntity<List<String>> getAllCollectionsNames(){
 		FireBaseService service = new FireBaseService();
-		return service.getAllCollectionsNames();
-	}
+		List<String> list = service.getAllCollectionsNames();
+		return new ResponseEntity<List<String>>(list, HttpStatus.OK);
+	}  
 
-	@Override
-	public NewsBean getNews(String country, String categoty, String search) throws IOException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	public NewsBean getNews(String country, String categoty, String search) throws IOException {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 }
