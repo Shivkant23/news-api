@@ -21,17 +21,18 @@ import com.google.gson.Gson;
 
 
 public class ChatGptService {
-
+   public static String chatApiKey;
+	
    public static String chatGPT(String prompt) throws IOException {
        String url = "https://api.openai.com/v1/chat/completions";
-       String apiKey = "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";
+       
        String model = "gpt-3.5-turbo";
 
        RestTemplate template = new RestTemplate();
 
 	   HttpHeaders headers = new HttpHeaders();
 	   headers.add("Content-Type", "application/json");
-	   headers.setBearerAuth(apiKey);
+	   headers.setBearerAuth(chatApiKey);
 	   Map<String, Object> map = new HashMap<>();
 	   map.put("model", model);
 	   List<Map<String, String>> list = new ArrayList<>();

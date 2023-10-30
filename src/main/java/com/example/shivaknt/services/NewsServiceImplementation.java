@@ -25,17 +25,17 @@ import com.example.shivaknt.utils.CommonUtils;
 
 @Service
 public class NewsServiceImplementation implements NewsService{
-	public static String apiKey = "a04694ffe29145218220b70933537562";
+	public static String newsApiKey;
 	public static String[] listOfKeywords = new String[]{"in", "de", "us", "cn", "is", "rs", "jp", "ca", "business", "entertainment", "general", "health", "science", "sports", "technology"};
 	
 	private String getApiString(String countryCode, String category, String search){
 		String apiLink = "";
 		if(!category.isEmpty()) {
-			apiLink = "https://newsapi.org/v2/top-headlines?country=us&category="+category+"&apiKey="+apiKey;
+			apiLink = "https://newsapi.org/v2/top-headlines?country=us&category="+category+"&apiKey="+newsApiKey;
 		}else if(!countryCode.isEmpty()) {
-			apiLink = "https://newsapi.org/v2/top-headlines?country="+countryCode+"&category="+category+"&apiKey="+apiKey;
+			apiLink = "https://newsapi.org/v2/top-headlines?country="+countryCode+"&category="+category+"&apiKey="+newsApiKey;
 		}else if(!search.isEmpty()) {
-			apiLink = "https://newsapi.org/v2/everything?q="+search+"&apiKey="+apiKey;
+			apiLink = "https://newsapi.org/v2/everything?q="+search+"&apiKey="+newsApiKey;
 		}
 		return apiLink;
 	}
@@ -188,7 +188,7 @@ public class NewsServiceImplementation implements NewsService{
 		List<ArticlesBean> list = service.getParamArticles(collectionName);
 		NewsBean newsBean = new NewsBean();
 		
-		if(list.isEmpty()) {
+		if(!list.isEmpty()) {
 			newsBean = getNews(country, category, "", 0);
 		}
 		if(!list.isEmpty()) {

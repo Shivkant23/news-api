@@ -65,7 +65,7 @@ public class FireBaseService {
     	List<QueryDocumentSnapshot> documents = snapShot.getDocuments();
 		List<ArticlesBean> articles = new ArrayList<>();
 		for(int i = 0; i<documents.size();i++) {
-			 ArticlesBean articleItem =  documents.get(0).toObject(ArticlesBean.class);
+			 ArticlesBean articleItem =  documents.get(i).toObject(ArticlesBean.class);
 			 articles.add(articleItem);
 		}
     	return articles;
