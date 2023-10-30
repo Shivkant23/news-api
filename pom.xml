@@ -83,10 +83,10 @@
 			        </execution>
 			    </executions>
 			</plugin>
-			<plugin>
+			<!--<plugin>
 				<groupId>com.spotify</groupId>
 				<artifactId>dockerfile-maven-plugin</artifactId>
-				<version>1.4.3</version>
+				<version>1.4.7</version>
 				<executions>
 					<execution>
 						<id>default</id>
@@ -96,7 +96,7 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin>-->
 		</plugins>
 	</build>
 	<repositories>
