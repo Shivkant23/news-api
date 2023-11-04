@@ -48,48 +48,48 @@ public class NewsServiceImplementation implements NewsService{
 		RestTemplate restTemplate = new RestTemplate();
 		NewsBean result = restTemplate.getForObject(url, NewsBean.class);
 		int timeCounter = 0, counter = 0;
-		System.out.println("2News api is get called  :---  " + result.getArticles().size());
-		for(int i = 0; i<result.getArticles().size(); i++) {
-			try {
-				String urlOfWeb = result.getArticles().get(i).getUrl();
-				String strTitle = CommonUtils.getString(result.getArticles().get(i).getTitle());
-				String strDescription = CommonUtils.getString(result.getArticles().get(i).getDescription());
-				String strContent = CommonUtils.getString(result.getArticles().get(i).getContent());
-				String content = "";
-				
-				content = readWebUrl(urlOfWeb, strTitle, strDescription, strContent);
-				
-				String fixedContent = "";
-				String arr [] = content.split("content|meta|title|IE=edge|link|window|script|https|div|http|document|path|href=|&quot;|class=|data-");
-				ArrayList<String> list = new ArrayList<>();
-				for(int j = 0; j<arr.length; j++) {
-					if(arr[j].startsWith("=")) {
-						list.add(arr[j]);
-					}
-				}
-
-				fixedContent = String.join(" ", list);
-				if(!fixedContent.isEmpty()) {
-//					counter++;
-					timeCounter++;
-					try {
-						fixedContent = fixedContent.length() < 13300 ? fixedContent : fixedContent.substring(0, 13300);
-						fixedContent = ChatGptService.chatGPT(fixedContent);
-						if(timeCounter == 3) {
-							TimeUnit.MINUTES.sleep(1);
-							TimeUnit.SECONDS.sleep(30);
-							timeCounter = 0;
-						}
-	
-					}catch(Exception e) {
-						System.out.println(e);
-					}
-				}
-				result.getArticles().get(i).setMyContent(fixedContent);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+//		System.out.println("2News api is get called  :---  " + result.getArticles().size());
+//		for(int i = 0; i<result.getArticles().size(); i++) {
+//			try {
+//				String urlOfWeb = result.getArticles().get(i).getUrl();
+//				String strTitle = CommonUtils.getString(result.getArticles().get(i).getTitle());
+//				String strDescription = CommonUtils.getString(result.getArticles().get(i).getDescription());
+//				String strContent = CommonUtils.getString(result.getArticles().get(i).getContent());
+//				String content = "";
+//				
+//				content = readWebUrl(urlOfWeb, strTitle, strDescription, strContent);
+//				
+//				String fixedContent = "";
+//				String arr [] = content.split("content|meta|title|IE=edge|link|window|script|https|div|http|document|path|href=|&quot;|class=|data-");
+//				ArrayList<String> list = new ArrayList<>();
+//				for(int j = 0; j<arr.length; j++) {
+//					if(arr[j].startsWith("=")) {
+//						list.add(arr[j]);
+//					}
+//				}
+//
+//				fixedContent = String.join(" ", list);
+//				if(!fixedContent.isEmpty()) {
+////					counter++;
+//					timeCounter++;
+//					try {
+//						fixedContent = fixedContent.length() < 13300 ? fixedContent : fixedContent.substring(0, 13300);
+//						fixedContent = ChatGptService.chatGPT(fixedContent);
+//						if(timeCounter == 3) {
+//							TimeUnit.MINUTES.sleep(1);
+//							TimeUnit.SECONDS.sleep(30);
+//							timeCounter = 0;
+//						}
+//	
+//					}catch(Exception e) {
+//						System.out.println(e);
+//					}
+//				}
+//				result.getArticles().get(i).setMyContent(fixedContent);
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//		}
 		FireBaseService service = new FireBaseService();
 		String collectionName = !(category.isEmpty()) ? category : !(country.isEmpty()) ? country : search;
 		service.pushDataOnDatabaseService(result.getArticles(), collectionName, reqId);

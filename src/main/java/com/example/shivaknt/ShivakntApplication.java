@@ -9,6 +9,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -29,7 +31,10 @@ import com.google.firebase.remoteconfig.Template;
 public class ShivakntApplication {
 
 	public static void main(String[] args)  throws IOException, FirebaseRemoteConfigException, InterruptedException, ExecutionException{
+		Logger logger = LoggerFactory.getLogger(ShivakntApplication.class);
+		logger.info("this the starting of the project.");
 		initialiseFirebase();
+		logger.info("firebase has been initialise.");
 		SpringApplication.run(ShivakntApplication.class, args);
 	}
 	
@@ -57,13 +62,6 @@ public class ShivakntApplication {
 	          FirebaseApp.initializeApp(options);
 	          
 	          FirebaseRemoteConfig mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
-	//          mFirebaseRemoteConfig.getTemplate();
-	          Template temp = mFirebaseRemoteConfig.getTemplate();
-	          Map<String, Parameter> map = temp.getParameters();
-	          System.out.println("temp :- "+map.get("news_key").getConditionalValues());
-	          System.out.println("temp :- "+map.get("chat_key").getDefaultValue());
-	          System.out.println("temp :- "+map.get("chat_key").getValueType());
-	          System.out.println("sdfsdf");
 	          
 	          Template template = mFirebaseRemoteConfig.getTemplateAsync().get();
 	          ParameterValue newsParameterValue = template.getParameters().get("news_key").getDefaultValue();
