@@ -1,32 +1,13 @@
 package com.example.shivaknt.controller;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
-import java.util.Scanner;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
-
-import com.example.shivaknt.models.ArticlesBean;
 import com.example.shivaknt.models.NewsBean;
-import com.example.shivaknt.services.ChatGptService;
-import com.example.shivaknt.services.FireBaseService;
 import com.example.shivaknt.services.NewsService;
 
 
@@ -54,8 +35,8 @@ public class NewsController {
 //	}
 	
 	@GetMapping(path = "/news-fetch")
-	public ResponseEntity<NewsBean> fetchNewsFromFireStore(@RequestParam String country, @RequestParam String categoty) throws IOException, InterruptedException, ExecutionException {
-		return newsService.fetchNewsFromFireStore(country, categoty);
+	public ResponseEntity<NewsBean> fetchNewsFromFireStore(@RequestParam String country, @RequestParam String category) throws IOException, InterruptedException, ExecutionException {
+		return newsService.fetchNewsFromFireStore(country, category);
 	}
 	
 	@GetMapping(path = "/news-fetch-search")
