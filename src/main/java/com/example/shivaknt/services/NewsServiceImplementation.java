@@ -96,13 +96,6 @@ public class NewsServiceImplementation implements NewsService{
 		return result; 
 	}
 	
-//	public String getChat(String prompt) throws IOException {
-//		System.out.println("Chat gpt api is calling");
-//		String asd = "";
-//		asd = ChatGptService.chatGPT(prompt);
-//		System.out.println("Chat gpt api is calling - 2 :-= "+ asd);
-//		return asd;
-//	}
 	
 	public String readWebUrl(String urlOfWeb, String title, String desc, String content) throws IOException{
 		String parseLine = "";
