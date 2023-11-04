@@ -1,15 +1,15 @@
-E:\Shivkant\shivaknt\src\main\java\com\example\shivaknt\models\Message.java
-E:\Shivkant\shivaknt\src\main\java\com\example\shivaknt\models\NewsBean.java
-E:\Shivkant\shivaknt\src\main\java\com\example\shivaknt\models\SourceBean.java
-E:\Shivkant\shivaknt\src\main\java\com\example\shivaknt\services\NewsService.java
-E:\Shivkant\shivaknt\src\main\java\com\example\shivaknt\services\ChatGptService.java
-E:\Shivkant\shivaknt\src\main\java\com\example\shivaknt\models\Usage.java
-E:\Shivkant\shivaknt\src\main\java\com\example\shivaknt\services\FireBaseService.java
-E:\Shivkant\shivaknt\src\main\java\com\example\shivaknt\models\Choices.java
-E:\Shivkant\shivaknt\src\main\java\com\example\shivaknt\models\DataModel.java
-E:\Shivkant\shivaknt\src\main\java\com\example\shivaknt\services\NewsServiceImplementation.java
-E:\Shivkant\shivaknt\src\main\java\com\example\shivaknt\models\ArticlesBean.java
-E:\Shivkant\shivaknt\src\main\java\com\example\shivaknt\models\ChatGptResponseModel.java
-E:\Shivkant\shivaknt\src\main\java\com\example\shivaknt\utils\CommonUtils.java
-E:\Shivkant\shivaknt\src\main\java\com\example\shivaknt\ShivakntApplication.java
-E:\Shivkant\shivaknt\src\main\java\com\example\shivaknt\controller\NewsController.java
+I:\Bus Travel\News App\Backend\shivaknt\src\main\java\com\example\shivaknt\services\ChatGptService.java
+I:\Bus Travel\News App\Backend\shivaknt\src\main\java\com\example\shivaknt\utils\CommonUtils.java
+I:\Bus Travel\News App\Backend\shivaknt\src\main\java\com\example\shivaknt\controller\NewsController.java
+I:\Bus Travel\News App\Backend\shivaknt\src\main\java\com\example\shivaknt\services\FireBaseService.java
+I:\Bus Travel\News App\Backend\shivaknt\src\main\java\com\example\shivaknt\services\NewsServiceImplementation.java
+I:\Bus Travel\News App\Backend\shivaknt\src\main\java\com\example\shivaknt\models\NewsBean.java
+I:\Bus Travel\News App\Backend\shivaknt\src\main\java\com\example\shivaknt\models\ArticlesBean.java
+I:\Bus Travel\News App\Backend\shivaknt\src\main\java\com\example\shivaknt\services\NewsService.java
+I:\Bus Travel\News App\Backend\shivaknt\src\main\java\com\example\shivaknt\models\Message.java
+I:\Bus Travel\News App\Backend\shivaknt\src\main\java\com\example\shivaknt\ShivakntApplication.java
+I:\Bus Travel\News App\Backend\shivaknt\src\main\java\com\example\shivaknt\models\Usage.java
+I:\Bus Travel\News App\Backend\shivaknt\src\main\java\com\example\shivaknt\models\DataModel.java
+I:\Bus Travel\News App\Backend\shivaknt\src\main\java\com\example\shivaknt\models\SourceBean.java
+I:\Bus Travel\News App\Backend\shivaknt\src\main\java\com\example\shivaknt\models\Choices.java
+I:\Bus Travel\News App\Backend\shivaknt\src\main\java\com\example\shivaknt\models\ChatGptResponseModel.java
