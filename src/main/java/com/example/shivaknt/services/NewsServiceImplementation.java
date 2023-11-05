@@ -26,17 +26,22 @@ import com.example.shivaknt.utils.CommonUtils;
 @Service
 public class NewsServiceImplementation implements NewsService{
 	public static String newsApiKey;
-	public static String[] listOfKeywords = new String[]{"in", "de", "us", "cn", "is", "rs", "jp", "ca", "business", "entertainment", "general", "health", "science", "sports", "technology"};
+	public static String[] listOfKeywords = new String[]{"in", "de", "us", "cn", "il", "rs", "jp", "ca", "business", "entertainment", "general", "health", "science", "sports", "technology"};
 	
 	private String getApiString(String countryCode, String category, String search){
 		String apiLink = "";
-		if(!category.isEmpty()) {
-			apiLink = "https://newsapi.org/v2/top-headlines?country=us&category="+category+"&apiKey="+newsApiKey;
-		}else if(!countryCode.isEmpty()) {
-			apiLink = "https://newsapi.org/v2/top-headlines?country="+countryCode+"&category="+category+"&apiKey="+newsApiKey;
-		}else if(!search.isEmpty()) {
+//		if(!category.isEmpty()) {
+//			apiLink = "https://newsapi.org/v2/top-headlines?country=us&category="+category+"&apiKey="+newsApiKey;
+//		}else if(!countryCode.isEmpty()) {
+//			apiLink = "https://newsapi.org/v2/top-headlines?country="+countryCode+"&category="+category+"&apiKey="+newsApiKey;
+//		}else if(!search.isEmpty()) {
+//			apiLink = "https://newsapi.org/v2/everything?q="+search+"&apiKey="+newsApiKey;
+//		}
+		if(!search.isEmpty()) {
 			apiLink = "https://newsapi.org/v2/everything?q="+search+"&apiKey="+newsApiKey;
-		}
+		} else{
+			apiLink = "https://newsapi.org/v2/top-headlines?country="+countryCode+"&category="+category+"&apiKey="+newsApiKey;
+		} 
 		return apiLink;
 	}
 	
@@ -91,7 +96,7 @@ public class NewsServiceImplementation implements NewsService{
 //			}
 //		}
 		FireBaseService service = new FireBaseService();
-		String collectionName = !(category.isEmpty()) ? category : !(country.isEmpty()) ? country : search;
+		String collectionName = search.isEmpty() ? (country+""+category) : search;
 		service.pushDataOnDatabaseService(result.getArticles(), collectionName, reqId);
 		return result; 
 	}
@@ -104,41 +109,41 @@ public class NewsServiceImplementation implements NewsService{
 //		return asd;
 //	}
 	
-	public String readWebUrl(String urlOfWeb, String title, String desc, String content) throws IOException{
-		String parseLine = "";
-		StringBuffer sb2 = new StringBuffer();
-		
-		try {
-			String str1 = title;
-			String str2 = desc;
-			String str3 = content;
-			
-            URL URL = new URL(urlOfWeb); 
-            BufferedReader br = new BufferedReader(new InputStreamReader(URL.openStream()));
-            
-            while ((parseLine = br.readLine()) != null) {
-            	if(parseLine.contains(str1)) {
-            		sb2.append(parseLine+ " ");
-            	}            	
-            	if(parseLine.contains(str2)) {
-            		sb2.append(parseLine+ " ");
-            	}
-            	if(parseLine.contains(str3)) {
-            		sb2.append(parseLine+ " ");
-            	}
-            }
-            br.close();
-        } catch (MalformedURLException me) {
-            System.out.println(me);
-        }
-		System.out.println();
-		System.out.println("This is the String Object: " + sb2);
-		return sb2.toString();
-	}
+//	public String readWebUrl(String urlOfWeb, String title, String desc, String content) throws IOException{
+//		String parseLine = "";
+//		StringBuffer sb2 = new StringBuffer();
+//		
+//		try {
+//			String str1 = title;
+//			String str2 = desc;
+//			String str3 = content;
+//			
+//            URL URL = new URL(urlOfWeb); 
+//            BufferedReader br = new BufferedReader(new InputStreamReader(URL.openStream()));
+//            
+//            while ((parseLine = br.readLine()) != null) {
+//            	if(parseLine.contains(str1)) {
+//            		sb2.append(parseLine+ " ");
+//            	}            	
+//            	if(parseLine.contains(str2)) {
+//            		sb2.append(parseLine+ " ");
+//            	}
+//            	if(parseLine.contains(str3)) {
+//            		sb2.append(parseLine+ " ");
+//            	}
+//            }
+//            br.close();
+//        } catch (MalformedURLException me) {
+//            System.out.println(me);
+//        }
+//		System.out.println();
+//		System.out.println("This is the String Object: " + sb2);
+//		return sb2.toString();
+//	}
 	
 	
 	
-	@Scheduled(fixedDelay = 240, initialDelay = 60, timeUnit = TimeUnit.MINUTES)
+	@Scheduled(fixedDelay = 120, initialDelay = 30, timeUnit = TimeUnit.MINUTES)
 	public void scheduleTask() throws InterruptedException, ExecutionException, IOException{
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss.SSS");
 		String strDate = dateFormat.format(new Date());
@@ -156,8 +161,9 @@ public class NewsServiceImplementation implements NewsService{
 			// TODO: handle exception
 		}
 		
-		List<String> collections = (List<String>) getAllCollectionsNames();
+//		List<String> collections = (List<String>) getAllCollectionsNames();
 		FireBaseService service = new FireBaseService();
+		List<String> collections = service.getAllCollectionsNames();
 		for(int i = 0; i<collections.size(); i++) {
 			if(!Arrays.stream(listOfKeywords).anyMatch(collections.get(i)::equals)) {
 				service.deletePreviousArticles(collections.get(i));
@@ -184,11 +190,12 @@ public class NewsServiceImplementation implements NewsService{
 	
 	public ResponseEntity<NewsBean> fetchNewsFromFireStore(String country, String category) throws IOException, InterruptedException, ExecutionException {
 		FireBaseService service = new FireBaseService();
-		String collectionName = !(category.isEmpty()) ? category  : country;
-		List<ArticlesBean> list = service.getParamArticles(collectionName);
+//		String collectionName = !(category.isEmpty()) ? category  : country;
+		System.out.println(country+""+category);
+		List<ArticlesBean> list = service.getParamArticles((country+""+category));
 		NewsBean newsBean = new NewsBean();
 		
-		if(!list.isEmpty()) {
+		if(list.isEmpty()) {
 			newsBean = getNews(country, category, "", 0);
 		}
 		if(!list.isEmpty()) {

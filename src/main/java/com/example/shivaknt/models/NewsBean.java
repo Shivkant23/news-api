@@ -5,7 +5,7 @@ import java.util.List;
 public class NewsBean {
 
     private String status;
-    private int totalresults;
+    private int totalResults;
     private List<ArticlesBean> articles;
     public void setStatus(String status) {
          this.status = status;
@@ -14,11 +14,11 @@ public class NewsBean {
          return status;
      }
 
-    public void setTotalresults(int totalresults) {
-         this.totalresults = totalresults;
+    public void setTotalresults(int totalResults) {
+         this.totalResults = totalResults;
      }
      public int getTotalresults() {
-         return totalresults;
+         return totalResults;
      }
 
     public void setArticles(List<ArticlesBean> articles) {

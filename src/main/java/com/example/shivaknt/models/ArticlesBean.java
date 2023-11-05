@@ -9,8 +9,8 @@ public class ArticlesBean {
     private String title;
     private String description;
     private String url;
-    private String urltoimage;
-    private Date publishedat;
+    private String urlToImage;
+	private Date publishedAt;
     private String content;
     private String myContent;
     public void setSource(SourceBean source) {
@@ -33,7 +33,18 @@ public class ArticlesBean {
      public String getTitle() {
          return title;
      }
-
+     public String getUrlToImage() {
+ 		return urlToImage;
+ 	}
+ 	public void setUrlToImage(String urlToImage) {
+ 		this.urlToImage = urlToImage;
+ 	}
+ 	public Date getPublishedAt() {
+ 		return publishedAt;
+ 	}
+ 	public void setPublishedAt(Date publishedAt) {
+ 		this.publishedAt = publishedAt;
+ 	}
     public void setDescription(String description) {
          this.description = description;
      }
@@ -47,33 +58,17 @@ public class ArticlesBean {
      public String getUrl() {
          return url;
      }
-
-    public void setUrltoimage(String urltoimage) {
-         this.urltoimage = urltoimage;
-     }
-     public String getUrltoimage() {
-         return urltoimage;
-     }
-
-    public void setPublishedat(Date publishedat) {
-         this.publishedat = publishedat;
-     }
-     public Date getPublishedat() {
-         return publishedat;
-     }
-
     public void setContent(String content) {
          this.content = content;
-     }
-     public String getContent() {
+    }
+    public String getContent() {
          return content;
-     }
-     
-     public void setMyContent(String myContent) {
+    } 
+    public void setMyContent(String myContent) {
          this.myContent = myContent;
-     }
-     public String getMyContent() {
+    }
+    public String getMyContent() {
          return myContent;
-     }
+    }
 
 }

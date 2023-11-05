@@ -59,11 +59,6 @@ public class ShivakntApplication {
 	          FirebaseRemoteConfig mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
 	//          mFirebaseRemoteConfig.getTemplate();
 	          Template temp = mFirebaseRemoteConfig.getTemplate();
-	          Map<String, Parameter> map = temp.getParameters();
-	          System.out.println("temp :- "+map.get("news_key").getConditionalValues());
-	          System.out.println("temp :- "+map.get("chat_key").getDefaultValue());
-	          System.out.println("temp :- "+map.get("chat_key").getValueType());
-	          System.out.println("sdfsdf");
 	          
 	          Template template = mFirebaseRemoteConfig.getTemplateAsync().get();
 	          ParameterValue newsParameterValue = template.getParameters().get("news_key").getDefaultValue();
@@ -74,9 +69,6 @@ public class ShivakntApplication {
 	          
 	          NewsServiceImplementation.newsApiKey = newsApiKey;
 	          ChatGptService.chatApiKey = chatApiKey;
-	          
-	          System.out.println(NewsServiceImplementation.newsApiKey);
-	          System.out.println(ChatGptService.chatApiKey);
 
            } catch (IOException e) {
                e.printStackTrace();
