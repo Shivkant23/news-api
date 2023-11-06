@@ -35,8 +35,8 @@ public class NewsController {
 //	}
 	
 	@GetMapping(path = "/news-fetch")
-	public ResponseEntity<NewsBean> fetchNewsFromFireStore(@RequestParam String country, @RequestParam String categoty) throws IOException, InterruptedException, ExecutionException {
-		return newsService.fetchNewsFromFireStore(country, categoty);
+	public ResponseEntity<NewsBean> fetchNewsFromFireStore(@RequestParam String country, @RequestParam String category) throws IOException, InterruptedException, ExecutionException {
+		return newsService.fetchNewsFromFireStore(country, category);
 	}
 	
 	@GetMapping(path = "/news-fetch-search")
