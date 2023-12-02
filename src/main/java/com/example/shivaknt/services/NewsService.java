@@ -18,4 +18,6 @@ public interface NewsService {
 	ResponseEntity<NewsBean> fetchNewsFromFireStore(String country, String categoty) throws IOException, InterruptedException, ExecutionException;
 	
 	ResponseEntity<List<String>> getAllCollectionsNames();
+	
+	String fetchNewsPrivacyPolicy();
 }

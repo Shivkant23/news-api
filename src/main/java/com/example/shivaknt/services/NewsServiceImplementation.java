@@ -210,6 +210,13 @@ public class NewsServiceImplementation implements NewsService{
 		FireBaseService service = new FireBaseService();
 		List<String> list = service.getAllCollectionsNames();
 		return new ResponseEntity<List<String>>(list, HttpStatus.OK);
+	}
+
+	@Override
+	public String fetchNewsPrivacyPolicy() {
+		// TODO Auto-generated method stub
+		return "<html>\n" + "<header><title>Welcome</title></header>\n" +
+		          "<body>\n" + "Hello world\n" + "</body>\n" + "</html>";
 	}  
 
 //	@Override

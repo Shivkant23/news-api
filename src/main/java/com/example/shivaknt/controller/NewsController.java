@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+
 import com.example.shivaknt.models.NewsBean;
 import com.example.shivaknt.services.NewsService;
 
@@ -24,10 +26,6 @@ public class NewsController {
 		return ResponseEntity.ok("Test get endpoint is working");
 	}
 	
-//	@GetMapping(path = "/news-fetch-api")
-//	public NewsBean fetchNewsFromNewsApi(@RequestParam String country, @RequestParam String categoty) throws IOException {
-//		return newsService.getNews(country, categoty, "");
-//	}
 //	
 //	@GetMapping(path = "/news-fetch-search-api")
 //	public NewsBean fetchNewsFromNewsApi(@RequestParam String search) throws IOException {
